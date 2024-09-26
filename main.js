@@ -4,8 +4,35 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+modal.classList.add('hidden')
+
+const likeButtons = document.getElementsByClassName("like-glyph")
 
 
+
+document.addEventListener('click', event => {
+    if (event.target.className === "like" && event.target.innerText.includes(EMPTY_HEART)) {
+      mimicServerCall("bogusUrl")
+      .then(function(serverMessage) {
+          event.target.innerText = ''
+          event.target.innerText = `Like! ${FULL_HEART}`
+      })
+      .catch(function(error) {
+        modal.classList.remove('hidden')
+      })
+    }
+    else if (event.target.className === "like" && event.target.innerText.includes(FULL_HEART)) {
+      mimicServerCall("bogusUrl")
+      .then(function(serverMessage) {
+      event.target.innerText = ''
+      event.target.innerText = `Like! ${EMPTY_HEART}`
+    })
+    .catch(function(error) {
+      modal.classList.remove('hidden')
+    })
+    }
+})
+ 
 
 //------------------------------------------------------------------------------
 // Don't change the code below: this function mocks the server response
